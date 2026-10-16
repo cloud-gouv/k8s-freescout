@@ -1,0 +1,43 @@
+image:
+  repository: ghcr.io/telescoop/freescout-lasuite
+  tag: sha-324dd49
+
+freescout:
+  display_errors: false
+  enable_auto_update: false
+  enable_ssl_proxy: true
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+  fsGroup: 1000
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  capabilities:
+    drop: [ALL]
+resources:
+  requests:
+    memory: 1Gi
+  limits:
+    memory: 1Gi
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+mariadb:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/mariadb
+  architecture: standalone
+  auth:
+    database: freescout
+    username: user
+  primary:
+    persistence:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 8Gi

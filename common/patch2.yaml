@@ -1,0 +1,14 @@
+# Patch over patch to remove old port and set new one
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freescout
+  namespace: freescout
+spec:
+  template:
+    spec:
+      containers:
+        - name: freescout
+          ports:
+            - name: http
+              containerPort: 8080

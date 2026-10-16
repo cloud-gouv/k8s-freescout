@@ -1,0 +1,21 @@
+environments:
+  dev:
+    values:
+      - version: 0.2.6
+---
+
+repositories:
+  - name: soultrace
+    url: https://charts.soultrace.net
+
+releases:
+  - name: freescout
+    namespace: {{ .Namespace }}
+    chart: soultrace/freescout
+    version: {{ .Values.version }}
+    values:
+      - env/{{ .Environment.Name }}/values.yaml
+    secrets:
+      - env/{{ .Environment.Name }}/secrets.enc.yaml
+    strategicMergePatches:
+      - common/patch.yaml

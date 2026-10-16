@@ -1,0 +1,42 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+  hosts:
+    - host: freescout.opicloud-ohe-dev-osc-euw2-wapp-02.k8s.dev.opicloud.fr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: freescout-tls
+      hosts:
+        - freescout.opicloud-ohe-dev-osc-euw2-wapp-02.k8s.dev.opicloud.fr
+        # TODO migrate to envoy
+
+freescout:
+  admin_email: "test-user@numerique.gouv.fr"
+  admin_first_name: "test"
+  admin_last_name: "user"
+  display_errors: false
+  enable_auto_update: false
+  enable_ssl_proxy: true
+  site_url: "https://freescout.opicloud-ohe-dev-osc-euw2-wapp-02.k8s.dev.opicloud.fr"
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+mariadb:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/mariadb
+  architecture: standalone
+  auth:
+    database: freescout
+    username: user
+  primary:
+    persistence:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 8Gi

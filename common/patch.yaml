@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freescout
+spec:
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: lasuite/k8s-mgmt-pod:20260226

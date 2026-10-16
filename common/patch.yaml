@@ -11,14 +11,14 @@ spec:
       securityContext:
         seccompProfile:
           type: RuntimeDefault
-      initContainers:
-        - name: wait-for-db
-          # image: lasuite/k8s-mgmt-pod:20260226
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            capabilities:
-              drop: [ALL]
+      initContainers: null
+        # - name: wait-for-db
+        #   # image: lasuite/k8s-mgmt-pod:20260226
+        #   securityContext:
+        #     allowPrivilegeEscalation: false
+        #     runAsNonRoot: true
+        #     capabilities:
+        #       drop: [ALL]
       containers:
         - name: freescout
           securityContext:

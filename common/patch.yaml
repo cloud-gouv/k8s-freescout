@@ -8,6 +8,32 @@ spec:
     type: Recreate
   template:
     spec:
+      securityContext:
+        secCompProfile: RuntimeDefault
       initContainers:
         - name: wait-for-db
           image: lasuite/k8s-mgmt-pod:20260226
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+      containers:
+        - name: freescout
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: freescout-mariadb
+  namespace: freescout
+spec:
+  template:
+    spec:
+      securityContext:
+        secCompProfile: RuntimeDefault
+      containers:
+        - name: mariadb
+          securityContext:
+            capabilities:
+              drop: [ALL]

@@ -13,7 +13,7 @@ spec:
           type: RuntimeDefault
       initContainers:
         - name: wait-for-db
-          image: lasuite/k8s-mgmt-pod:20260226
+          # image: lasuite/k8s-mgmt-pod:20260226
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
@@ -43,3 +43,6 @@ spec:
           securityContext:
             capabilities:
               drop: [ALL]
+          resources:
+            limits:
+              memory: 1Gi

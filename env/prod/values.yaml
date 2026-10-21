@@ -1,0 +1,20 @@
+# when in prod, change URL to freescout.beta.numerique.gouv.fr
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+  hosts:
+    - host: freescout.lasuite-prd-osc-cgw1-expe-wapp-01.k8s.opicloud.numerique.gouv.fr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: freescout-tls
+      hosts:
+        - freescout.lasuite-prd-osc-cgw1-expe-wapp-01.k8s.opicloud.numerique.gouv.fr
+        # TODO migrate to envoy
+
+freescout:
+  site_url: "https://freescout.lasuite-prd-osc-cgw1-expe-wapp-01.k8s.opicloud.numerique.gouv.fr"
+

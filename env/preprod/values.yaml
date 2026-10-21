@@ -1,0 +1,19 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-production
+  hosts:
+    - host: freescout.lasuite-ara-ppr-osc-euw2-expe-01.k8s.cloud.incubateur.net
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: freescout-tls
+      hosts:
+        - freescout.lasuite-ara-ppr-osc-euw2-expe-01.k8s.cloud.incubateur.net
+        # TODO migrate to envoy
+
+freescout:
+  site_url: "https://freescout.lasuite-ara-ppr-osc-euw2-expe-01.k8s.cloud.incubateur.net"
+

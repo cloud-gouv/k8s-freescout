@@ -6,6 +6,9 @@ freescout:
   display_errors: false
   enable_auto_update: false
   enable_ssl_proxy: true
+  admin_email: "jay.cormier@numerique.gouv.fr"
+  admin_first_name: "Jay"
+  admin_last_name: "CORMIER"
 
 podSecurityContext:
   seccompProfile:
